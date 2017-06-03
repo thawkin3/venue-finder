@@ -1,0 +1,40 @@
+<!doctype html>
+<html ng-app="VenueFinder" lang="en">
+    
+    <head>
+        <title>Venue Finder</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <link href="stylesheets/bootstrap.min.css" rel="stylesheet" type="text/css">
+        <link href="stylesheets/c3.css" rel="stylesheet" type="text/css">
+        <link href="stylesheets/style.css" rel="stylesheet" type="text/css">
+        <script src="javascripts/libraries/jquery-1.12.0.min.js" type="text/javascript"></script>
+        <script src="javascripts/libraries/angular.js" type="text/javascript"></script>
+        <script src="javascripts/libraries/angular-route.js" type="text/javascript"></script>
+        <script src="javascripts/libraries/d3.v3.js" type="text/javascript"></script>
+        <script src="javascripts/libraries/c3.js" type="text/javascript"></script>
+        <script src="javascripts/app/app.js" type="text/javascript"></script>
+        <script src="javascripts/app/services/AuthService.js" type="text/javascript"></script>
+        <script src="javascripts/app/controllers/navbarController.js" type="text/javascript"></script>
+        <script src="javascripts/app/controllers/loginController.js" type="text/javascript"></script>
+        <script src="javascripts/app/controllers/createAccountController.js" type="text/javascript"></script>
+        <script src="javascripts/app/controllers/venuesController.js" type="text/javascript"></script>
+    </head>
+  
+    <body>
+        <div class="container-fluid allPages">
+            <div class="navbar navbar-default" ng-controller="navbarController as navbarCtrl">
+                <h1 class="navbar-btn title">Venue Finder</h1>
+                <div class="buttonSet">
+                    <a class="btn btn-large btn-primary navbar-btn pull-right" ng-click="logout()" ng-show="isLoggedIn">Log out</a>
+                    <a ng-href="#/login" class="btn btn-large btn-primary navbar-btn pull-right" ng-show="!isLoggedIn">Log in</a>
+                    <a ng-href="#/venues" class="btn btn-large btn-primary navbar-btn pull-right">Home</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div ng-view id="mainContent"></div>
+        </div>
+    </body>
+
+</html>

@@ -1,0 +1,40 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="text-center welcomeText">
+                <h2>Welcome to Venue Finder!</h2>
+                <br>
+                <p>Find the hottest venues in your area and RSVP where you'll be tonight.</p>
+                <br>
+                <p>Login or create your account to get started.</p>
+                <br>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="text-center loginContent">
+                <form id="loginForm" role="form" ng-submit="login()">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="username" placeholder="Username" ng-model="username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-success">Sign in</button>
+                    </div>
+                </form>
+
+                <p class="separator">--- OR ---</p>
+
+                <form id="createAccountForm" role="form" ng-submit="goToCreateAccount()">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-danger">Create new account</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

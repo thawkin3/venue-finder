@@ -1,0 +1,29 @@
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="text-center createAccountContent">
+                <form id="createAccountForm" role="form" ng-submit="createAccount()">
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="username" placeholder="Username" ng-model="username">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password">
+                    </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control" id="passwordSecond" placeholder="Re-enter password" ng-model="passwordSecond">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-lg btn-success">Create account</button>
+                    </div>
+
+                    <div class="errorMessages">
+                        <div class="errorMessage" ng-show="showErrorMessageMissingUsername">Please enter a username</div>
+                        <div class="errorMessage" ng-show="showErrorMessageUsernameTaken">Username is taken</div>
+                        <div class="errorMessage" ng-show="showErrorMessageMissingPassword">Please enter a password</div>
+                        <div class="errorMessage" ng-show="showErrorMessageNonMatchingPasswords">Passwords do not match</div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
