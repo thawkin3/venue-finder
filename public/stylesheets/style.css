@@ -77,6 +77,10 @@ html, body {
 	margin-top: 0px;
 }
 
+.loginContent .errorMessage {
+	margin: 0px auto 30px auto;
+}
+
 /*****************************/
 /* CREATE ACCOUNT */
 /*****************************/
@@ -84,45 +88,6 @@ html, body {
 	max-width: 400px;
     width: 100%;
     margin: 40px auto;
-}
-
-
-/*****************************/
-/* CREATE POLL & EDIT POLL */
-/*****************************/
-.createPollContent #createPollForm, .editPollContent #editPollForm {
-	max-width: 400px;
-    width: 100%;
-    margin: 40px auto;
-}
-.createPollContent #createPollForm #questionText, .editPollContent #editPollForm #questionText {
-	margin-bottom: 30px;
-}
-.createPollContent #createPollForm .answerChoice, .editPollContent #editPollForm .answerChoice {
-	width: 78%;
-	max-width: 260px;
-	display: inline-block;
-}
-.createPollContent #createPollForm button.plus-minus, .editPollContent #editPollForm button.plus-minus {
-	position: relative;
-	top: -1px;
-}
-.createPollContent #createPollForm input[type=checkbox], .editPollContent #editPollForm input[type=checkbox] {
-	display: inline-block;
-    width: 20px;
-    position: absolute;
-    left: -5px;
-    top: -11px;
-    margin-left: 0px;
-}
-.createPollContent #createPollForm label, .editPollContent #editPollForm label {
-	position: relative;
-}
-.createPollContent #createPollForm div.checkbox, .editPollContent #editPollForm div.checkbox {
-	margin-top: 30px;
-}
-.createPollContent #createPollForm button[type=submit], .editPollContent #editPollForm button[type=submit] {
-	margin-top: 30px;
 }
 
 
@@ -210,74 +175,5 @@ html, body {
 	.allPollsContent .search-box {
 		max-width: 200px;
 	}
-}
-
-
-/*****************************/
-/* VOTE */
-/*****************************/
-.voteOnPollContent #voteOnPollForm {
-	max-width: 400px;
-    width: 100%;
-    margin: 40px auto;
-}
-.voteOnPollContent #voteOnPollForm .questionText {
-	font-size: 20px;
-}
-.voteOnPollContent #voteOnPollForm .answerChoice {
-	font-size: 16px;
-	background: #fff;
-	color: #000;
-	padding: 10px 20px;
-    border-radius: 6px;
-    cursor: pointer;
-}
-.voteOnPollContent #voteOnPollForm .answerChoice:hover {
-	background: #ddd;
-}
-.voteOnPollContent #voteOnPollForm .answerChoice.selected {
-	background: #888;
-}
-.voteOnPollContent #voteOnPollForm .other {
-	visibility: hidden;
-}
-.voteOnPollContent #voteOnPollForm .other.selected {
-	visibility: visible;
-}
-
-
-/*****************************/
-/* VIEW RESULTS */
-/*****************************/
-.pollResultsContent {
-	margin-top: 40px;
-}
-.pollResultsContent .questionText {
-	font-size: 20px;
-	margin-bottom: 20px;
-}
-.pollResultsContent .c3 svg {
-	font-size: 16px;
-}
-.pollResultsContent .c3 svg text {
-	fill: #fff;
-}
-.pollResultsContent .c3-tooltip-container {
-	color: #000;
-}
-.pollResultsContent .graphButtons .buttonsRow {
-	text-align: right;
-}
-.pollResultsContent .graphButtons .buttonLabel {
-	position: relative;
-	margin-right: 5px;
-}
-.pollResultsContent .graphButtons .btn {
-	margin-left: 4px;
-}
-.pollResultsContent .graphButtons .btn.selected {
-	color: #fff;
-    background-color: #288DAB;
-    border-color: #288DAB;
 }
 

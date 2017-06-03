@@ -49,7 +49,7 @@ router.post('/api/v1/users/login', function(req, res, next) {
     }
     if (!user) {
       return res.status(401).json({
-        err: info
+        err: 'Username or password is incorrect'
       });
     }
     req.logIn(user, function(err) {

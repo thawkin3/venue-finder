@@ -38,6 +38,6 @@
 	venuesController.$inject = ['$scope', '$routeParams', '$rootScope', '$http', '$location'];
 
 	angular.module('VenueFinder')
-	    .controller('allPollsController', allPollsController);
+	    .controller('venuesController', venuesController);
 
 }());
