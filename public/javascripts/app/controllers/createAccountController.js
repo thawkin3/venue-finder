@@ -12,7 +12,6 @@
 		function userCreationSuccess () {
 			console.log("user created!");
     		$scope.error = false;
-            $scope.errorMessage = "";
 	        $scope.disabled = false;
         	$scope.username = "";
         	$scope.password = "";
@@ -24,7 +23,6 @@
 		function userCreationError () {
 			console.log("username taken");
 			$scope.error = true;
-	        $scope.errorMessage = "Something went wrong!";
 	        $scope.disabled = false;
 	        $scope.username = "";
 	        $scope.password = "";
@@ -58,13 +56,6 @@
 			    AuthService.register($scope.username, $scope.password)
 			    .then(userCreationSuccess, userCreationError);
 
-
-				// $http.post('/api/v1/users/register',
-				// 	{
-				// 		username: $scope.username,
-				// 		password: $scope.password
-				// 	}
-				// ).then(userCreationSuccess, userCreationError);
 			}
 		}
 
