@@ -52,7 +52,7 @@ html, body {
 
 
 /*****************************/
-/* HOME */
+/* WELCOME */
 /*****************************/
 .welcomeText {
 	max-width: 400px;
@@ -92,88 +92,56 @@ html, body {
 
 
 /*****************************/
-/* ALL POLLS */
+/* HOME PAGE */
 /*****************************/
-.allPollsContent {
+.homePageContent {
 	max-width: 100%;
     width: 100%;
     margin: 40px auto;
 }
-.allPollsContent table {
+.homePageContent #findVenuesForm {
+	max-width: 400px;
+	width: 100%;
+    margin: auto;
+    text-align: center;
+}
+.homePageContent #findVenuesForm .form-control {
+	text-align: center;
+}
+.homePageContent table {
 	text-align: left;
 	width: 100%;
 }
-.allPollsContent table tbody tr:nth-child(odd) {
+.homePageContent table tbody tr:nth-child(odd) {
    background-color: #286090;
 }
-.allPollsContent table tbody tr:first-child {
+.homePageContent table tbody tr:first-child {
    background-color: #002D5D;
    font-weight: bold;
 }
-.allPollsContent table tbody tr td {
+.homePageContent table tbody tr td {
 	vertical-align: middle;
 }
-.allPollsContent table .tableSortHeader {
+.homePageContent table .tableSortHeader {
 	cursor: pointer;
 }
-.allPollsContent table tbody .pollQuestion {
+.homePageContent table tbody .pollQuestion {
 	width: 50%;
 }
-.allPollsContent table tbody .voteCount {
+.homePageContent table tbody .voteCount {
 	width: 20%;
 }
-.allPollsContent table tbody .pollActions {
+.homePageContent table tbody .pollActions {
 	width: 30%;
 }
-.allPollsContent .glyphicon {
+.homePageContent .glyphicon {
 	top: 2px;
 }
-.allPollsContent .glyphicon.transparent {
+.homePageContent .glyphicon.transparent {
 	opacity: 0.5;
 }
-.allPollsContent .search-box {
+.homePageContent .search-box {
 	max-width: 250px;
 	margin-bottom: 20px;
-}
-@media screen and (max-width: 1199px) {
-	.allPollsContent table tbody .pollQuestion {
-		width: 45%;
-	}
-	.allPollsContent table tbody .voteCount {
-		width: 20%;
-	}
-	.allPollsContent table tbody .pollActions {
-		width: 35%;
-	}
-}
-@media screen and (max-width: 991px) {
-	.allPollsContent table tbody .pollActions .btn {
-		margin-bottom: 6px;
-	}
-	.allPollsContent table tbody .pollActions .btn.deletePollButton {
-		margin-bottom: 0px;
-	}
-	.allPollsContent table tbody .pollQuestion {
-		width: 45%;
-	}
-	.allPollsContent table tbody .voteCount {
-		width: 20%;
-	}
-	.allPollsContent table tbody .pollActions {
-		width: 35%;
-	}
-}
-@media screen and (max-width: 709px) {
-	.allPollsContent table tbody .pollActions .btn {
-		display: block;
-		width: 100%;
-		margin-bottom: 6px;
-	}
-	.allPollsContent table tbody .pollActions .btn.deletePollButton {
-		margin-bottom: 0px;
-	}
-	.allPollsContent .search-box {
-		max-width: 200px;
-	}
 }
 

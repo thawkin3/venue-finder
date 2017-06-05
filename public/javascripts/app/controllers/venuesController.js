@@ -5,6 +5,11 @@
 		// GET THE CURRENT USER'S USERNAME
 		$scope.username = $rootScope.loggedInUser;
 
+		// FIND VENUES
+		$scope.findVenues = function () {
+			console.log("looking for venues!");
+		};
+
 	};
 
 	venuesController.$inject = ['$scope', '$routeParams', '$rootScope', '$http', '$location'];
