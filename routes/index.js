@@ -4,6 +4,14 @@ var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var User = require('../models/user.js');
 
+var request = require("request");
+
+// Yelp info
+var grant_type = "client_credentials";
+var client_id = "DUZCUdDpUkO-JcNJfX-DHw";
+var client_secret = "MrJrT9GCWghK879AoYMb6hJ6VbmE3NbPeJ2RtlXzPrka4HXY8KwGAQoHEqDz5ymc";
+var authToken = "Bearer rwPrY83DcCpidIo6G72j7gJiS4pa_w2MBaijeQK_zYOglWFpifuHWkacn01Ap7LdXrfB00YGREfRhFx9l5AqCfASvi67uiUk3iHnFhyX1BBU3dmzGQvQAERoKwIzWXYx";
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.sendFile('index.html', { root:  'public' });
@@ -25,6 +33,8 @@ db.once('open', function() {
   console.log('Connected');
 });
 
+
+// Register a new user
 router.post('/api/v1/users/register', function(req, res) {
   User.register(new User({ username: req.body.username }),
     req.body.password, function(err, account) {
@@ -42,6 +52,7 @@ router.post('/api/v1/users/register', function(req, res) {
   });
 });
 
+// Login
 router.post('/api/v1/users/login', function(req, res, next) {
   passport.authenticate('local', function(err, user, info) {
     if (err) {
@@ -66,6 +77,7 @@ router.post('/api/v1/users/login', function(req, res, next) {
   })(req, res, next);
 });
 
+// Logout
 router.get('/api/v1/users/logout', function(req, res) {
   req.logout();
   res.status(200).json({
@@ -73,6 +85,7 @@ router.get('/api/v1/users/logout', function(req, res) {
   });
 });
 
+// Get login status
 router.get('/api/v1/users/status', function(req, res) {
   if (!req.isAuthenticated()) {
     return res.status(200).json({
@@ -86,103 +99,58 @@ router.get('/api/v1/users/status', function(req, res) {
   });
 });
 
-/* POST a new poll */
-// router.post('/api/v1/polls', function(req, res, next) {
-//   console.log("POST create poll route");
-//   console.log(req.body);
 
-//   var newPoll = new Poll(req.body);
-//   console.log(newPoll);
-//   console.log(req.body.Poll);
-  
-//   newPoll.save(true, function(err, post) {
-//     // if (err) return console.error(err);
-//     if (err) res.sendStatus(500);
-//     console.log(post);
-//     // res.sendStatus(200);
-//     res.json(post);
-//   });
-// });
+// Get Yelp Auth Token
+router.post('/getAuthToken', function(req, res, next) {
 
-/* GET all polls for a user */
-// router.get('/api/v1/polls/:username', function(req, res, next) {
-// 	console.log("GET polls route");
-// 	var query = Poll.find({ username: req.params.username }).sort({ questionText: 1 });
-// 	query.exec(function(err, polls) {
-// 			// If there's an error, print it out
-// 			// if (err) return console.error(err);
-// 			if (err) {
-// 				res.sendStatus(404);
-// 			// Otherwise, return all the polls for that user
-// 			} else {
-// 			    res.json(polls);
-// 			}
+    // Query the Yelp API and return the auth token
+    request({
+      uri: "https://api.yelp.com/oauth2/token",
+      method: "POST",
+      headers: {
+            "content-type": "application/x-www-form-urlencoded"
+      },
+      form: {
+            grant_type: grant_type,
+            client_id: client_id,
+            client_secret: client_secret
+      },
+      timeout: 10000,
+      followRedirect: true,
+      maxRedirects: 10,
+      json: true
+    }, function(err, response, body) {
+        if (err) return console.error(err);
+        // console.log(body);
+        // res.status(200).json(body);
+        res.status(200).json(body.access_token);
+    });
 
-// 	});
-// });
+});
 
-/* GET a single poll for a user */
-// router.get('/api/v1/polls/:username/:pollId', function(req, res, next) {
-// 	console.log("GET single poll route");
-// 	var query = Poll.findOne({ username: req.params.username, _id: req.params.pollId });
-// 	query.exec(function(err, poll) {
-// 			// If there's an error, print it out
-// 			// if (err) return console.error(err);
-// 			if (err) {
-// 				res.sendStatus(404);
-// 			// Otherwise, return the single poll for that user
-// 			} else {
-// 			    res.json(poll);
-// 			}
+// Search the Yelp API
+router.get('/search', function(req, res, next) {
+    var theLocation = req.query.location;
+    var theSearchTerm = req.query.searchTerm;
 
-// 	});
-// });
+    // Query the Yelp API and return the search results
+    request({
+      uri: "https://api.yelp.com/v3/businesses/search?location=" + theLocation + "&term=" + theSearchTerm,
+      method: "GET",
+      headers: {
+            Authorization: authToken
+          },
+      timeout: 10000,
+      followRedirect: true,
+      maxRedirects: 10
+    }, function(err, response, body) {
+        if (err) return console.error(err);
+        // console.log(JSON.parse(body));
+        res.status(200).json(JSON.parse(body));
+    });
 
-/* PUT a single poll for a user to update that poll */
-/* ALSO */
-/* PUT a single poll for a participant to vote on that poll */
-// router.put('/api/v1/polls/:username/:pollId', function(req, res, next) {
-// 	console.log("PUT single poll route");
-// 	var query = Poll.findOne({ username: req.params.username, _id: req.params.pollId });
-// 	query.exec(function(err, updatedPoll) {
-// 			// If there's an error, print it out
-// 			// if (err) return console.error(err);
-// 			if (err) {
-// 				res.sendStatus(404);
-// 			// Otherwise, update the single poll for that user
-// 			} else {
-// 				if (req.body.question != undefined) updatedPoll.question = req.body.question;
-// 				if (req.body.choices != undefined) updatedPoll.choices = req.body.choices;
-// 				if (req.body.username != undefined) updatedPoll.username = req.body.username;
-// 				if (req.body.votes != undefined) updatedPoll.votes = req.body.votes;
-// 				if (req.body.totalVotes != undefined) updatedPoll.totalVotes = req.body.totalVotes;
-// 				if (req.body.allowNewChoices != undefined) updatedPoll.allowNewChoices = req.body.allowNewChoices;
-// 				updatedPoll.save(true, function(err, put) {
-// 				    if (err) return console.error(err);
-// 				    console.log(put);
-// 				    res.sendStatus(200);
-// 				});
-// 			}
+});
 
-// 	});
-// });
-
-/* DELETE a single poll for a user */
-// router.delete('/api/v1/polls/:username/:pollId', function(req, res, next) {
-// 	console.log("DELETE single poll route");
-// 	var query = Poll.remove({ username: req.params.username, _id: req.params.pollId });
-// 	query.exec(function(err) {
-// 			// If there's an error, print it out
-// 			// if (err) return console.error(err);
-// 			if (err) {
-// 				res.sendStatus(500);
-// 			// Otherwise, delete the single poll for that user
-// 			} else {
-// 				res.sendStatus(200);
-// 			}
-
-// 	});
-// });
 
 /* route all other traffic to the home page. */
 router.get('*', function(req, res, next) {
