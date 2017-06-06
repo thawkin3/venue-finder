@@ -2,15 +2,31 @@
 /* GENERAL */
 /*****************************/
 html, body {
-	background: #337ab7;
+	background: #66b9bf;
 	color: #fff;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif !important;
 	font-size: 16px;
 }
 
+.btn-secondary {
+	background: #e37222;
+	color: #fff;
+}
+.btn-secondary:hover, .btn-secondary:focus  {
+	background: #CA5909;
+	color: #fff;
+}
+.btn-secondary:active {
+	background: #B03F00;
+	color: #fff;
+}
+
 .allPages .navbar {
-	background: #fff;
-	color: #000;
+	/*background: #eeaa7b;*/
+	/*border-color: #eeaa7b;*/
+	background: #e37222;
+	border-color: #e37222;
+	color: #fff;
 	padding: 0px 10px;
 	margin-left: -15px;
 	margin-right: -15px;
@@ -33,7 +49,8 @@ html, body {
 	display: inline-block;
 	padding: 6px 12px;
 	margin-left: 4px;
-	margin-top: 14px;
+	margin-top: 11px;
+	background: #07889b;
 }
 #mainContent {
 	margin: auto;
@@ -44,7 +61,8 @@ html, body {
  	max-width: 400px;
 	color: #fff;
 	text-align: center;
-	background: #c9302c;
+	/*background: #c9302c;*/
+	background: #7D0C00;
 	border-radius: 4px;
 	margin: 30px auto;
 	padding: 10px 20px;
@@ -107,6 +125,7 @@ html, body {
 }
 .homePageContent #findVenuesForm .form-control {
 	text-align: center;
+	margin-bottom: 40px;
 }
 .homePageContent .results {
 	margin: 80px auto;
@@ -117,7 +136,7 @@ html, body {
 	text-align: left;
     margin: 20px auto;
     padding: 10px 20px;
-    border: 2px solid #fff;
+    border: 2px solid #e37222;
     border-radius: 16px;
     background: #fff;
     color: #000;
