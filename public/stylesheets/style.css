@@ -108,40 +108,36 @@ html, body {
 .homePageContent #findVenuesForm .form-control {
 	text-align: center;
 }
-.homePageContent table {
+.homePageContent .results {
+	margin: 80px auto;
+	max-width: 100%;
+	width: 800px;
+}
+.homePageContent .results .venue {
 	text-align: left;
-	width: 100%;
+    margin: 20px auto;
+    padding: 10px 20px;
+    border: 2px solid #fff;
+    border-radius: 16px;
+    background: #fff;
+    color: #000;
 }
-.homePageContent table tbody tr:nth-child(odd) {
-   background-color: #286090;
+.homePageContent .results .venue .imageLeft {
+	display: inline-block;
 }
-.homePageContent table tbody tr:first-child {
-   background-color: #002D5D;
-   font-weight: bold;
+.homePageContent .results .venue .textInfoRight {
+	display: inline-block;
+	margin-left: 20px;
 }
-.homePageContent table tbody tr td {
-	vertical-align: middle;
+.homePageContent .results .venue .venueImage {
+	width: 100px;
+	border-radius: 8px;
 }
-.homePageContent table .tableSortHeader {
-	cursor: pointer;
-}
-.homePageContent table tbody .pollQuestion {
-	width: 50%;
-}
-.homePageContent table tbody .voteCount {
-	width: 20%;
-}
-.homePageContent table tbody .pollActions {
-	width: 30%;
+.homePageContent .results .venue .venueName {
+	display: inline-block;
 }
 .homePageContent .glyphicon {
 	top: 2px;
 }
-.homePageContent .glyphicon.transparent {
-	opacity: 0.5;
-}
-.homePageContent .search-box {
-	max-width: 250px;
-	margin-bottom: 20px;
-}
+
 

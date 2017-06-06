@@ -10,6 +10,8 @@
 
 		// HIDE ERROR MESSAGES BY DEFAULT
 		$scope.showErrorMessageCannotFindVenues = false;
+		$scope.showErrorMessageNoVenuesMatch = false;
+		$scope.showVenues = false;
 
 		// FIND VENUES
 		$scope.findVenues = function () {
@@ -22,13 +24,23 @@
 		// SUCCESS
 		function getVenuesSuccess (response) {
 			$scope.showErrorMessageCannotFindVenues = false;
+			$scope.showErrorMessageNoVenuesMatch = false;
 			console.log(response.data);
 			$scope.venues = response.data.businesses;
+			if ($scope.venues.length == 0) {
+				$scope.showErrorMessageNoVenuesMatch = true;
+			} else {
+				
+				$scope.showVenues = true;
+
+			}
 		}
 
 		// ERROR
 		function getVenuesError (response) {
 			$scope.showErrorMessageCannotFindVenues = true;
+			$scope.showErrorMessageNoVenuesMatch = false;
+			$scope.showVenues = false;
 		}
 
 	};

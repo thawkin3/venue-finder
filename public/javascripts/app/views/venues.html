@@ -21,6 +21,22 @@
 	        		    <button type="submit" class="btn btn-lg btn-success">Find venues!</button>
 	        		</div>
 	        	</form>
+
+	        	<div class="results">
+	        		<p class="errorMessage" ng-show="showErrorMessageCannotFindVenues">Sorry, something's not right! Please try again later.</p>
+	        		<p class="errorMessage" ng-show="showErrorMessageNoVenuesMatch">Sorry, we couldn't find any venues that match your search. Please try a different location or key words.</p>
+	        		<div class="venuesFound" ng-show="showVenues">
+	        			<div class="venue" ng-repeat="venue in venues">
+	        				<div class="imageLeft">
+	        					<img ng-src="{{ venue.image_url }}" class="venueImage" />
+	        				</div>
+	        				<div class="textInfoRight">
+	        					<h4 class="venueName"><a ng-href="{{ venue.url }}">{{ venue.name }}</a></h4>
+	        					<p class="rating">Rating: {{ venue.rating }} stars</p>
+	        				</div>
+	        			</div>
+        			</div>
+	        	</div>
 	        </div>
         </div>
     </div>
