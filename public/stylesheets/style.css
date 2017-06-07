@@ -8,11 +8,11 @@ html, body {
 	font-size: 16px;
 }
 
-.btn-secondary {
+.btn-secondary, .btn-secondary:focus {
 	background: #e37222;
 	color: #fff;
 }
-.btn-secondary:hover, .btn-secondary:focus  {
+.btn-secondary:hover  {
 	background: #CA5909;
 	color: #fff;
 }
@@ -124,8 +124,13 @@ html, body {
     text-align: center;
 }
 .homePageContent #findVenuesForm .form-control {
-	text-align: center;
-	margin-bottom: 40px;
+	text-align: left;
+}
+.homePageContent #findVenuesForm .mySubmitButton {
+	margin-top: 40px;
+}
+.homePageContent #findVenuesForm label {
+	text-align: left;
 }
 .homePageContent .results {
 	margin: 80px auto;
@@ -135,22 +140,32 @@ html, body {
 .homePageContent .results .venue {
 	text-align: left;
     margin: 20px auto;
-    padding: 10px 20px;
+    padding: 30px 40px;
     border: 2px solid #e37222;
-    border-radius: 16px;
+    border-radius: 6px;
     background: #fff;
     color: #000;
+    position: relative;
 }
 .homePageContent .results .venue .imageLeft {
 	display: inline-block;
+	position: relative;
+	vertical-align: top;
 }
 .homePageContent .results .venue .textInfoRight {
 	display: inline-block;
 	margin-left: 20px;
+	position: relative;
+	vertical-align: top;
+}
+.homePageContent .results .venue h4 {
+	margin-top: 0px;
 }
 .homePageContent .results .venue .venueImage {
 	width: 100px;
-	border-radius: 8px;
+	border-radius: 4px;
+    vertical-align: top;
+    border: solid 1px #66b9bf;
 }
 .homePageContent .results .venue .venueName {
 	display: inline-block;

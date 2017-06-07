@@ -16,9 +16,10 @@
 		// FIND VENUES
 		$scope.findVenues = function () {
 			console.log("looking for venues!");
-			var location = "Orem, UT";
-			var term = "entertainment";
-			$http.get('/search?location=' + location + "&searchTerm=" + term).then(getVenuesSuccess, getVenuesError);
+			if (typeof $scope.searchTerm == "undefined") {
+				$scope.searchTerm = "";
+			}
+			$http.get('/search?location=' + $scope.location + "&searchTerm=" + $scope.searchTerm).then(getVenuesSuccess, getVenuesError);
 		};
 
 		// SUCCESS
