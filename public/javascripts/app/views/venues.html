@@ -33,6 +33,9 @@
 	        	<div class="results">
 	        		<p class="errorMessage" ng-show="showErrorMessageCannotFindVenues">Sorry, something's not right! Please try again later.</p>
 	        		<p class="errorMessage" ng-show="showErrorMessageNoVenuesMatch">Sorry, we couldn't find any venues that match your search. Please try a different location or key words.</p>
+	        		<p class="loading" ng-show="showLoadingGif">
+	        			<img class="loadingGif" ng-src="images/loading-transparent.gif" />
+	        		</p>
 	        		<div class="venuesFound" ng-show="showVenues">
 	        			<div class="venue" ng-repeat="venue in venues">
 	        				<div class="imageLeft">

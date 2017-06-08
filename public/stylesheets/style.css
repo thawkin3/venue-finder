@@ -8,6 +8,12 @@ html, body {
 	font-size: 16px;
 }
 
+@media screen and (max-width: 576px) {
+	h1 {
+		font-size: 34px;
+	}
+}
+
 .btn-secondary, .btn-secondary:focus {
 	background: #e37222;
 	color: #fff;
@@ -172,6 +178,29 @@ html, body {
 }
 .homePageContent .glyphicon {
 	top: 2px;
+}
+.homePageContent .loadingGif {
+	width: 60px;
+}
+
+@media screen and (max-width: 767px) {
+	.homePageContent .results .venue {
+	    padding: 20px;
+	}
+	.homePageContent #findVenuesForm .form-control {
+		text-align: center;
+	}
+}
+
+@media screen and (max-width: 576px) {
+	.homePageContent .results .venue .imageLeft {
+	    display: block;
+	}
+	.homePageContent .results .venue .textInfoRight {
+	    display: block;
+	    margin-left: 0px;
+	    margin-top: 20px;
+	}
 }
 
 

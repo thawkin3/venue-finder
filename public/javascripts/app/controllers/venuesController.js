@@ -12,13 +12,23 @@
 		$scope.showErrorMessageCannotFindVenues = false;
 		$scope.showErrorMessageNoVenuesMatch = false;
 		$scope.showVenues = false;
+		$scope.showLoadingGif = false;
 
 		// FIND VENUES
 		$scope.findVenues = function () {
 			console.log("looking for venues!");
+			if (typeof $scope.location == "undefined") {
+				$scope.location = "";
+			}
 			if (typeof $scope.searchTerm == "undefined") {
 				$scope.searchTerm = "";
 			}
+
+			$scope.showErrorMessageCannotFindVenues = false;
+			$scope.showErrorMessageNoVenuesMatch = false;
+			$scope.showLoadingGif = true;
+			$scope.showVenues = false;
+			
 			$http.get('/search?location=' + $scope.location + "&searchTerm=" + $scope.searchTerm).then(getVenuesSuccess, getVenuesError);
 		};
 
@@ -26,14 +36,15 @@
 		function getVenuesSuccess (response) {
 			$scope.showErrorMessageCannotFindVenues = false;
 			$scope.showErrorMessageNoVenuesMatch = false;
-			console.log(response.data);
+			$scope.showLoadingGif = true;
+			// console.log(response.data);
 			$scope.venues = response.data.businesses;
-			if ($scope.venues.length == 0) {
+			if (typeof response.data.error != "undefined" || $scope.venues.length == 0) {
+				$scope.showLoadingGif = false;
 				$scope.showErrorMessageNoVenuesMatch = true;
 			} else {
-				
+				$scope.showLoadingGif = false;
 				$scope.showVenues = true;
-
 			}
 		}
 
@@ -41,6 +52,7 @@
 		function getVenuesError (response) {
 			$scope.showErrorMessageCannotFindVenues = true;
 			$scope.showErrorMessageNoVenuesMatch = false;
+			$scope.showLoadingGif = false;
 			$scope.showVenues = false;
 		}
 
