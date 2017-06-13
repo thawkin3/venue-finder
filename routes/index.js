@@ -3,6 +3,7 @@ var router = express.Router();
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 var User = require('../models/user.js');
+var Rsvp = require('../models/rsvp.js');
 
 var request = require("request");
 
@@ -149,6 +150,39 @@ router.get('/search', function(req, res, next) {
         res.status(200).json(JSON.parse(body));
     });
 
+});
+
+
+// GET RSVPs for a Venue
+router.get('/rsvp/:venueID', function(req, res, next) {
+    var query = Rsvp.find({ venueID: req.params.venueID });
+    query.exec(function(err, rsvps) {
+        // If there's an error, print it out
+        // if (err) return console.error(err);
+        if (err) {
+          res.sendStatus(404);
+        // Otherwise, return all the polls for that user
+        } else {
+            res.status(200).json(rsvps);
+        }
+
+    });
+});
+
+// POST a new RSVP for a Venue
+router.post('/rsvp/:venueID', function(req, res, next) {
+    console.log(req.body);
+
+    var newRsvp = new Rsvp(req.body);
+    console.log(newRsvp);
+    
+    newRsvp.save(true, function(err, post) {
+        // if (err) return console.error(err);
+        if (err) res.sendStatus(500);
+        console.log(post);
+        // res.sendStatus(200);
+        res.status(200).json(post);
+    });
 });
 
 

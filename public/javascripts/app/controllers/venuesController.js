@@ -32,13 +32,14 @@
 			$http.get('/search?location=' + $scope.location + "&searchTerm=" + $scope.searchTerm).then(getVenuesSuccess, getVenuesError);
 		};
 
-		// SUCCESS
+		// GET VENUES SUCCESS
 		function getVenuesSuccess (response) {
 			$scope.showErrorMessageCannotFindVenues = false;
 			$scope.showErrorMessageNoVenuesMatch = false;
 			$scope.showLoadingGif = true;
 			// console.log(response.data);
 			$scope.venues = response.data.businesses;
+			$scope.getRsvps();
 			if (typeof response.data.error != "undefined" || $scope.venues.length == 0) {
 				$scope.showLoadingGif = false;
 				$scope.showErrorMessageNoVenuesMatch = true;
@@ -48,13 +49,62 @@
 			}
 		}
 
-		// ERROR
+		// GET VENUES ERROR
 		function getVenuesError (response) {
 			$scope.showErrorMessageCannotFindVenues = true;
 			$scope.showErrorMessageNoVenuesMatch = false;
 			$scope.showLoadingGif = false;
 			$scope.showVenues = false;
 		}
+
+
+		// RSVP TO A VENUE
+		$scope.rsvp = function (venueID) {
+			console.log("rsvp'ing!");
+			console.log(venueID);
+			$http.post('/rsvp/' + venueID, 
+				{
+					venueID: venueID,
+					user: $scope.username,
+					timestamp: Date.now()
+				}
+			).then(rsvpSuccess, rsvpError);
+		}
+
+		// RSVP SUCCESS
+		function rsvpSuccess (response) {
+			console.log("rsvp success");
+			console.log(response);
+		}
+
+		// RSVP ERROR
+		function rsvpError (response) {
+			console.log("rsvp error");
+			console.log(response);
+		}
+
+
+		// GET ALL RSVPS
+		$scope.getRsvps = function () {
+			for (var i = 0; i < $scope.venues.length; i++) {
+				$http.get('/rsvp/' + $scope.venues[i].id).then(getRsvpsSuccess(i), getRsvpsError);
+			}
+		}
+
+		// GET RSVP SUCCESS
+		function getRsvpsSuccess (venueNumber, response) {
+			console.log("got rsvp success");
+			console.log(venueNumber);
+			console.log(response);
+			// $scope.venues[venueNumber].rsvps = response.data;
+		}
+
+		// GET RSVP ERROR
+		function getRsvpsError (response) {
+			console.log("got rsvp error");
+			console.log(response);
+		}
+
 
 	};
 

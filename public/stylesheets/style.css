@@ -105,6 +105,7 @@ html, body {
 	margin: 0px auto 30px auto;
 }
 
+
 /*****************************/
 /* CREATE ACCOUNT */
 /*****************************/
@@ -175,6 +176,17 @@ html, body {
 }
 .homePageContent .results .venue .venueName {
 	display: inline-block;
+}
+.homePageContent .results .venue .goingContainer div {
+	display: inline-block;
+}
+.homePageContent .results .venue .goingContainer .ImGoing {
+    margin-right: 20px;
+}
+.homePageContent .results .venue .goingContainer .allGoing {
+	color: #e37222;
+    font-weight: bold;
+    cursor: pointer;
 }
 .homePageContent .glyphicon {
 	top: 2px;
