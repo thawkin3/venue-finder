@@ -60,25 +60,29 @@
 
 		// RSVP TO A VENUE
 		$scope.rsvp = function (venueID) {
-			console.log("rsvp'ing!");
-			console.log(venueID);
-			$http.post('/rsvp/' + venueID, 
-				{
-					venueID: venueID,
-					user: $scope.username,
-					timestamp: Date.now()
-				}
-			).then(rsvpSuccess, rsvpError);
+			if ($rootScope.isLoggedIn) {
+				console.log("rsvp'ing!");
+				console.log(venueID);
+				$http.post('/rsvp/' + venueID, 
+					{
+						venueID: venueID,
+						user: $scope.username,
+						timestamp: Date.now()
+					}
+				).then(rsvpSuccess, rsvpError);
+			} else {
+				$location.path("/login");
+			}
 		}
 
 		// RSVP SUCCESS
 		function rsvpSuccess (response) {
-			console.log("rsvp success");
-			console.log(response);
-			for (var i = 0; i < $scope.venues.length; i++) {
-				if ($scope.venues[i].venueID == response.data.venueID) {
-					$scope.venues[i].rsvps.push(response.data);
-					break;					
+			if (response.data.status != "already rsvp'd") {
+				for (var i = 0; i < $scope.venues.length; i++) {
+					if ($scope.venues[i].id == response.data.venueID) {
+						$scope.venues[i].rsvps.push(response.data);
+						break;					
+					}
 				}
 			}
 		}

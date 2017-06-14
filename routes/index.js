@@ -180,7 +180,7 @@ router.post('/rsvp/:venueID', function(req, res, next) {
         // Otherwise, return all the rsvps for that venue
         } else {
             var okToRsvp = true;
-            if (rsvps.length > 1) {
+            if (rsvps.length > 0) {
               // console.log(rsvps);
               // console.log(rsvps.length);
               // console.log(req.body.timestamp);
@@ -206,7 +206,7 @@ router.post('/rsvp/:venueID', function(req, res, next) {
                   res.status(200).json(post);
               });
             } else {
-                res.sendStatus(200);
+                res.status(200).json({status: "already rsvp'd"});
             }
         }
 

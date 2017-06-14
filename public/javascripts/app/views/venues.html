@@ -50,7 +50,7 @@
 	        					</p>
 	        					<p class="phone">{{ venue.display_phone }}</p>
 	        					<div class="goingContainer">
-	        						<div class="ImGoing" ng-show="isLoggedIn"><button class="btn btn-lg btn-secondary ImGoingButton" ng-click="rsvp(venue.id)">I'll be there</button></div>
+	        						<div class="ImGoing"><button class="btn btn-lg btn-secondary ImGoingButton" ng-click="rsvp(venue.id)">I'll be there</button></div>
 	        						<div class="allGoing">{{ venue.rsvps.length || "0" }} Going Tonight</div>
 	        					</div>
 	        				</div>
