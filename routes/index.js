@@ -160,8 +160,8 @@ router.get('/rsvp/:venueID', function(req, res, next) {
         // If there's an error, print it out
         // if (err) return console.error(err);
         if (err) {
-          res.sendStatus(404);
-        // Otherwise, return all the polls for that user
+          res.sendStatus(500);
+        // Otherwise, return all the rsvps for that venue
         } else {
             res.status(200).json(rsvps);
         }
@@ -173,16 +173,46 @@ router.get('/rsvp/:venueID', function(req, res, next) {
 router.post('/rsvp/:venueID', function(req, res, next) {
     console.log(req.body);
 
-    var newRsvp = new Rsvp(req.body);
-    console.log(newRsvp);
-    
-    newRsvp.save(true, function(err, post) {
-        // if (err) return console.error(err);
-        if (err) res.sendStatus(500);
-        console.log(post);
-        // res.sendStatus(200);
-        res.status(200).json(post);
+    var query = Rsvp.find({ venueID: req.params.venueID, user: req.body.user });
+    query.exec(function(err, rsvps) {
+        if (err) {
+          res.sendStatus(500);
+        // Otherwise, return all the rsvps for that venue
+        } else {
+            var okToRsvp = true;
+            if (rsvps.length > 1) {
+              // console.log(rsvps);
+              // console.log(rsvps.length);
+              // console.log(req.body.timestamp);
+              // console.log(rsvps[0].timestamp);
+              for (var i = 0; i < rsvps.length; i++) {
+                console.log(req.body.timestamp - rsvps[0].timestamp);
+                if (req.body.timestamp - rsvps[0].timestamp < 86400000) {
+                  okToRsvp = false;
+                  break;
+                }
+              }
+            }
+
+            if (okToRsvp) {
+              var newRsvp = new Rsvp(req.body);
+              console.log(newRsvp);
+              
+              newRsvp.save(true, function(err, post) {
+                  // if (err) return console.error(err);
+                  if (err) res.sendStatus(500);
+                  console.log(post);
+                  // res.sendStatus(200);
+                  res.status(200).json(post);
+              });
+            } else {
+                res.sendStatus(200);
+            }
+        }
+
     });
+
+    
 });
 
 

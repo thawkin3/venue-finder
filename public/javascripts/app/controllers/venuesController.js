@@ -75,6 +75,12 @@
 		function rsvpSuccess (response) {
 			console.log("rsvp success");
 			console.log(response);
+			for (var i = 0; i < $scope.venues.length; i++) {
+				if ($scope.venues[i].venueID == response.data.venueID) {
+					$scope.venues[i].rsvps.push(response.data);
+					break;					
+				}
+			}
 		}
 
 		// RSVP ERROR
@@ -86,25 +92,17 @@
 
 		// GET ALL RSVPS
 		$scope.getRsvps = function () {
-			for (var i = 0; i < $scope.venues.length; i++) {
-				$http.get('/rsvp/' + $scope.venues[i].id).then(getRsvpsSuccess(i), getRsvpsError);
-			}
+			angular.forEach($scope.venues, function(venue, index) {
+			    $http.get('/rsvp/' + venue.id)
+			    .then(function(response) {
+			        console.log(index);
+			        console.log(response);
+			        $scope.venues[index].rsvps = response.data;
+			    }, function(response) {
+			        console.log(response);
+			    });
+			});
 		}
-
-		// GET RSVP SUCCESS
-		function getRsvpsSuccess (venueNumber, response) {
-			console.log("got rsvp success");
-			console.log(venueNumber);
-			console.log(response);
-			// $scope.venues[venueNumber].rsvps = response.data;
-		}
-
-		// GET RSVP ERROR
-		function getRsvpsError (response) {
-			console.log("got rsvp error");
-			console.log(response);
-		}
-
 
 	};
 
