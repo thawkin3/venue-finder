@@ -80,7 +80,7 @@
 			if (response.data.status != "already rsvp'd") {
 				for (var i = 0; i < $scope.venues.length; i++) {
 					if ($scope.venues[i].id == response.data.venueID) {
-						$scope.venues[i].rsvps.push(response.data);
+						$scope.venues[i].rsvps.push(response.data.user);
 						break;					
 					}
 				}
@@ -106,6 +106,30 @@
 			        console.log(response);
 			    });
 			});
+		}
+
+
+		// REMOVE YOUR RSVP FOR A VENUE
+		$scope.removeRsvp = function (venueID) {
+			if ($rootScope.isLoggedIn) {
+				console.log("removing your rsvp");
+				console.log(venueID);
+				$http.delete('/rsvp/' + venueID + "/" + $scope.username)
+				.then(function (response) {
+					console.log(response);
+					for (var i = 0; i < $scope.venues.length; i++) {
+						if ($scope.venues[i].id == venueID) {
+							$scope.venues[i].rsvps.splice($scope.venues[i].rsvps.indexOf($scope.username), 1);
+							break;					
+						}
+					}
+				}, function (response) {
+					console.log("remove rsvp error");
+					console.log(response);
+				});
+			} else {
+				$location.path("/login");
+			}
 		}
 
 	};

@@ -1,4 +1,4 @@
-var app = angular.module('VenueFinder', ['ngRoute']);
+var app = angular.module('VenueFinder', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
 app.config(function ($routeProvider){
 	$routeProvider

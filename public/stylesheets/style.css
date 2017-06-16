@@ -180,7 +180,7 @@ html, body {
 .homePageContent .results .venue .goingContainer div {
 	display: inline-block;
 }
-.homePageContent .results .venue .goingContainer .ImGoing {
+.homePageContent .results .venue .goingContainer .ImGoing, .homePageContent .results .venue .goingContainer .NotGoing {
     margin-right: 20px;
 }
 .homePageContent .results .venue .goingContainer .allGoing {

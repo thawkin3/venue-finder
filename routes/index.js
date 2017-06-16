@@ -166,7 +166,9 @@ router.get('/rsvp/:venueID', function(req, res, next) {
           if (rsvps.length > 0) {
             var usersGoing = [];
             for (var i = 0; i < rsvps.length; i++) {
-              usersGoing.push(rsvps[i].user);
+              if (usersGoing.indexOf(rsvps[i].user) == -1) {
+                usersGoing.push(rsvps[i].user);
+              }
             }
             res.status(200).json(usersGoing);
           } else {
@@ -194,6 +196,7 @@ router.post('/rsvp/:venueID', function(req, res, next) {
               }
             }
 
+            // Make a new rsvp if it's been more than 24 hours since the last rsvp for that user
             if (okToRsvp) {
               var newRsvp = new Rsvp(req.body);
               
@@ -210,8 +213,23 @@ router.post('/rsvp/:venueID', function(req, res, next) {
         }
 
     });
-
     
+});
+
+// DELETE an RSVP for a User and a Venue
+router.delete('/rsvp/:venueID/:user', function(req, res, next) {
+  var query = Rsvp.remove({ venueID: req.params.venueID, user: req.params.user, timestamp: { $gt: Date.now() - 24*60*60*1000 } });
+  query.exec(function(err) {
+      // If there's an error, print it out
+      // if (err) return console.error(err);
+      if (err) {
+        res.sendStatus(500);
+      // Otherwise, delete the rsvp to that venue for that user
+      } else {
+        res.sendStatus(200);
+      }
+
+  });
 });
 
 
