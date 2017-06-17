@@ -9,6 +9,11 @@
 	        .then(function () {
 	        	$rootScope.isLoggedIn = AuthService.isLoggedIn();
 	        	$rootScope.loggedInUser = AuthService.getUsername();
+	        	$rootScope.search = {
+			    	location: "",
+			    	searchTerm: ""
+			    };
+			    $rootScope.venues = [];
 	        	$location.path("/login");
 	        });
 

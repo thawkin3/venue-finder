@@ -1,6 +1,6 @@
 var app = angular.module('VenueFinder', ['ngRoute', 'ngSanitize', 'ui.bootstrap']);
 
-app.config(function ($routeProvider){
+app.config(function ($routeProvider) {
 	$routeProvider
 		.when('/', {
 			redirectTo: '/venues',
@@ -43,5 +43,11 @@ app.run(function($rootScope, $location, $window, $route, AuthService) {
     	});
     	
     });
+
+    $rootScope.venues = [];
+    $rootScope.search = {
+    	location: "",
+    	searchTerm: ""
+    };
 
 });

@@ -2,26 +2,23 @@
 
 	var venuesController = function ($scope, $routeParams, $rootScope, $http, $location) {
 
-		// INITIALIZE THE VENUES ARRAY
-		$scope.venues = [];
-
 		// GET THE CURRENT USER'S USERNAME
 		$scope.username = $rootScope.loggedInUser;
 
 		// HIDE ERROR MESSAGES BY DEFAULT
 		$scope.showErrorMessageCannotFindVenues = false;
 		$scope.showErrorMessageNoVenuesMatch = false;
-		$scope.showVenues = false;
+		$scope.showVenues = $rootScope.venues.length > 0 ? true : false;
 		$scope.showLoadingGif = false;
 
 		// FIND VENUES
 		$scope.findVenues = function () {
 			console.log("looking for venues!");
-			if (typeof $scope.location == "undefined") {
-				$scope.location = "";
+			if (typeof $rootScope.search.location == "undefined") {
+				$rootScope.search.location = "";
 			}
-			if (typeof $scope.searchTerm == "undefined") {
-				$scope.searchTerm = "";
+			if (typeof $rootScope.search.searchTerm == "undefined") {
+				$rootScope.search.searchTerm = "";
 			}
 
 			$scope.showErrorMessageCannotFindVenues = false;
@@ -29,7 +26,7 @@
 			$scope.showLoadingGif = true;
 			$scope.showVenues = false;
 			
-			$http.get('/search?location=' + $scope.location + "&searchTerm=" + $scope.searchTerm).then(getVenuesSuccess, getVenuesError);
+			$http.get('/search?location=' + $rootScope.search.location + "&searchTerm=" + $rootScope.search.searchTerm).then(getVenuesSuccess, getVenuesError);
 		};
 
 		// GET VENUES SUCCESS
@@ -38,9 +35,9 @@
 			$scope.showErrorMessageNoVenuesMatch = false;
 			$scope.showLoadingGif = true;
 			// console.log(response.data);
-			$scope.venues = response.data.businesses;
+			$rootScope.venues = response.data.businesses;
 			$scope.getRsvps();
-			if (typeof response.data.error != "undefined" || $scope.venues.length == 0) {
+			if (typeof response.data.error != "undefined" || $rootScope.venues.length == 0) {
 				$scope.showLoadingGif = false;
 				$scope.showErrorMessageNoVenuesMatch = true;
 			} else {
@@ -78,9 +75,9 @@
 		// RSVP SUCCESS
 		function rsvpSuccess (response) {
 			if (response.data.status != "already rsvp'd") {
-				for (var i = 0; i < $scope.venues.length; i++) {
-					if ($scope.venues[i].id == response.data.venueID) {
-						$scope.venues[i].rsvps.push(response.data.user);
+				for (var i = 0; i < $rootScope.venues.length; i++) {
+					if ($rootScope.venues[i].id == response.data.venueID) {
+						$rootScope.venues[i].rsvps.push(response.data.user);
 						break;					
 					}
 				}
@@ -96,12 +93,12 @@
 
 		// GET ALL RSVPS
 		$scope.getRsvps = function () {
-			angular.forEach($scope.venues, function(venue, index) {
+			angular.forEach($rootScope.venues, function(venue, index) {
 			    $http.get('/rsvp/' + venue.id)
 			    .then(function(response) {
 			        console.log(index);
 			        console.log(response);
-			        $scope.venues[index].rsvps = response.data;
+			        $rootScope.venues[index].rsvps = response.data;
 			    }, function(response) {
 			        console.log(response);
 			    });
@@ -117,9 +114,9 @@
 				$http.delete('/rsvp/' + venueID + "/" + $scope.username)
 				.then(function (response) {
 					console.log(response);
-					for (var i = 0; i < $scope.venues.length; i++) {
-						if ($scope.venues[i].id == venueID) {
-							$scope.venues[i].rsvps.splice($scope.venues[i].rsvps.indexOf($scope.username), 1);
+					for (var i = 0; i < $rootScope.venues.length; i++) {
+						if ($rootScope.venues[i].id == venueID) {
+							$rootScope.venues[i].rsvps.splice($rootScope.venues[i].rsvps.indexOf($scope.username), 1);
 							break;					
 						}
 					}
