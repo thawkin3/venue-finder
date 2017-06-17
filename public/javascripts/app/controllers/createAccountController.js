@@ -10,7 +10,7 @@
 
 		// SUCCESS CALLBACK
 		function userCreationSuccess () {
-			console.log("user created!");
+			// console.log("user created!");
     		$scope.error = false;
 	        $scope.disabled = false;
         	$scope.username = "";
@@ -21,7 +21,7 @@
 
 		// ERROR CALLBACK
 		function userCreationError () {
-			console.log("username taken");
+			// console.log("username taken");
 			$scope.error = true;
 	        $scope.disabled = false;
 	        $scope.username = "";
@@ -39,13 +39,13 @@
 			$scope.showErrorMessageNonMatchingPasswords = false;
 
 			if ($scope.username == "" || $scope.username == undefined) {
-				console.log("please enter a username");
+				// console.log("please enter a username");
 				$scope.showErrorMessageMissingUsername = true;
 			} else if ($scope.password == "" || $scope.password == undefined) {
-				console.log("please enter a password");
+				// console.log("please enter a password");
 				$scope.showErrorMessageMissingPassword = true;
 			} else if ($scope.password != $scope.passwordSecond) {
-				console.log("passwords do not match");
+				// console.log("passwords do not match");
 				$scope.showErrorMessageNonMatchingPasswords = true;
 			} else {
 				// initial values

@@ -19,8 +19,8 @@
 	        	$scope.errorMessage = "";
 	        	$scope.username = "";
 	        	$scope.password = "";
-	        	console.log(AuthService.isLoggedIn());
-	        	console.log(AuthService.getUsername());
+	        	// console.log(AuthService.isLoggedIn());
+	        	// console.log(AuthService.getUsername());
 	        	$rootScope.isLoggedIn = AuthService.isLoggedIn();
 	        	$rootScope.loggedInUser = AuthService.getUsername();
 	        	$location.path("/venues");

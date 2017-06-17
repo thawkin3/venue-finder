@@ -13,7 +13,7 @@
 
 		// FIND VENUES
 		$scope.findVenues = function () {
-			console.log("looking for venues!");
+			// console.log("looking for venues!");
 			if (typeof $rootScope.search.location == "undefined") {
 				$rootScope.search.location = "";
 			}
@@ -58,8 +58,8 @@
 		// RSVP TO A VENUE
 		$scope.rsvp = function (venueID) {
 			if ($rootScope.isLoggedIn) {
-				console.log("rsvp'ing!");
-				console.log(venueID);
+				// console.log("rsvp'ing!");
+				// console.log(venueID);
 				$http.post('/rsvp/' + venueID, 
 					{
 						venueID: venueID,
@@ -86,8 +86,8 @@
 
 		// RSVP ERROR
 		function rsvpError (response) {
-			console.log("rsvp error");
-			console.log(response);
+			// console.log("rsvp error");
+			// console.log(response);
 		}
 
 
@@ -96,11 +96,11 @@
 			angular.forEach($rootScope.venues, function(venue, index) {
 			    $http.get('/rsvp/' + venue.id)
 			    .then(function(response) {
-			        console.log(index);
-			        console.log(response);
+			        // console.log(index);
+			        // console.log(response);
 			        $rootScope.venues[index].rsvps = response.data;
 			    }, function(response) {
-			        console.log(response);
+			        // console.log(response);
 			    });
 			});
 		}
@@ -109,11 +109,11 @@
 		// REMOVE YOUR RSVP FOR A VENUE
 		$scope.removeRsvp = function (venueID) {
 			if ($rootScope.isLoggedIn) {
-				console.log("removing your rsvp");
-				console.log(venueID);
+				// console.log("removing your rsvp");
+				// console.log(venueID);
 				$http.delete('/rsvp/' + venueID + "/" + $scope.username)
 				.then(function (response) {
-					console.log(response);
+					// console.log(response);
 					for (var i = 0; i < $rootScope.venues.length; i++) {
 						if ($rootScope.venues[i].id == venueID) {
 							$rootScope.venues[i].rsvps.splice($rootScope.venues[i].rsvps.indexOf($scope.username), 1);
@@ -121,8 +121,8 @@
 						}
 					}
 				}, function (response) {
-					console.log("remove rsvp error");
-					console.log(response);
+					// console.log("remove rsvp error");
+					// console.log(response);
 				});
 			} else {
 				$location.path("/login");
